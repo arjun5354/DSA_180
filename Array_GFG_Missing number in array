@@ -1,0 +1,8 @@
+ int missingNumber(vector<int>& array, int n) {
+        int Total_ele_Sum = n*(n+1)/2;
+        int sum=0;
+        for(int i=0;i<n-1;i++){
+            sum+=array[i];
+        }
+        return Total_ele_Sum-sum;
+    }
