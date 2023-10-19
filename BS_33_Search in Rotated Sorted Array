@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int binary_Search(vector<int>&arr,int s,int e,int target){
+        int mid=s+(e-s)/2;
+        while(s<=e){
+            if(arr[mid]==target) return mid;
+            else if(arr[mid]<target) s=mid+1;
+            else e=mid-1;
+            mid=s+(e-s)/2;
+        }
+        return -1;
+    }
+    int FindPivot(vector<int>&arr){
+        int s=0;
+        int e=arr.size()-1;
+        int mid=s+(e-s)/2;
+        while(s<=e){
+            if(s==e)return s;
+            if(mid+1<=e&&arr[mid]>arr[mid+1]) return mid;
+           else if(mid-1>=s&&arr[mid-1]>arr[mid]) return mid-1;
+           else if(arr[s]>arr[mid]) e=mid-1;
+           else s=mid+1;
+           mid=s+(e-s)/2;
+        }
+        return -1;
+    }
+    int search(vector<int>& nums, int target) {
+        int pivot = FindPivot(nums);
+        if(target>=nums[0]&&target<=nums[pivot]){
+          return binary_Search(nums,0,pivot,target);
+        }
+        else {
+           return binary_Search(nums,pivot+1,nums.size()-1,target);
+        }
+        return -1;
+    }
+};
