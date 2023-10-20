@@ -1,0 +1,66 @@
+/*
+Question Link : https://practice.geeksforgeeks.org/problems/allocate-minimum-number-of-pages0937/1
+Company Tag   : Infosys,Amazon,Microsoft,Google,Codenation
+T.C->O(nlogn)
+S.C->O(1)
+*/
+// Approach-1
+// bool isPossibleAns(int A[],int N,int M,int sol){
+    //     int c=1;
+    //     int pagesome=0;
+    //     for(int i=0;i<N;i++){
+    //     if(A[i]>sol)return false;
+    //     if(pagesome+A[i]>sol){
+    //         c++;
+    //         pagesome=A[i];
+    //         if(c>M){
+    //             return false;
+    //         }
+    //     }
+    //     else pagesome+=A[i];
+    //     }
+    //     return true;
+    // }
+    //Function to find minimum number of pages.
+    int findPages(int A[], int N, int M) 
+    {
+    //   if(M>N) return -1;
+    //   int s=0;
+    //   int e=accumulate(A,A+N,0);
+    //   int ans=-1;
+    //   while(s<=e){
+    //       int mid=(s+e)/2;
+    //       if(isPossibleAns(A,N,M,mid)){
+    //           ans= mid;
+    //           e=mid-1;
+    //       }
+    //       else{
+    //           s=mid+1;
+    //       }
+    //   }
+    //   return ans;
+    // Approach-2
+     if(M>N) return -1;
+     int start=0,end=0,mid,ans;
+     for(int i=0;i<N;i++){
+         start=max(start,A[i]);
+         end+=A[i];
+     }
+     while(start<=end){
+         mid=start+(end-start)/2;
+         int pages=0,count=1;
+         for(int i=0;i<N;i++){
+             pages+=A[i];
+             if(pages>mid){
+                 pages=A[i];
+                 count++;
+             }
+         }
+         if(count<=M){
+             ans=mid;
+             end=mid-1;
+         }
+         else start=mid+1;
+     }
+     return ans;
+    }
