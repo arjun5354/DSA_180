@@ -1,0 +1,53 @@
+class Solution {
+public:
+    int splitArray(vector<int>& nums, int k) {
+        int n=nums.size();
+        int start=0,end=0,mid,ans;
+        for(int i=0;i<n;i++){
+            start=max(start,nums[i]);
+            end+=nums[i];
+        }
+        while(start<=end){
+            mid=start+(end-start)/2;
+            int split = 0,count=1;
+            for(int i=0;i<n;i++){
+                split+=nums[i];
+                if(split>mid){
+                    split=nums[i];
+                    count++;
+                }
+            }
+            if(count<=k){
+                ans=mid;
+                end=mid-1;
+            }
+            else start=mid+1;
+        }
+        return ans;
+    }
+};
+// GFG solution
+ int splitArray(int arr[] ,int N, int K) {
+        int start=0,end=0,mid,ans;
+        for(int i=0;i<N;i++){
+            start=max(start,arr[i]);
+            end+=arr[i];
+        }
+        while(start<=end){
+            mid=start+(end-start)/2;
+            int Split=0,count=1;
+            for(int i=0;i<N;i++){
+                Split+=arr[i];
+                if(Split>mid){
+                    Split=arr[i];
+                    count++;
+                }
+            }
+            if(count<=K){
+                ans=mid;
+                end=mid-1;
+            }
+            else start=mid+1;
+        }
+        return ans;
+    }
