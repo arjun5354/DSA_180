@@ -1,0 +1,46 @@
+class Solution {
+public:
+    bool canEatAll(vector<int>&arr,int mid,int h){
+        int ActualHours=0;
+        for(int &x:arr){
+            ActualHours+=x/mid;
+            if(x%mid!=0){
+                ActualHours++;
+            }
+        }
+        return ActualHours<=h;
+    }
+    int minEatingSpeed(vector<int>& arr, int h) {
+           int start=1,end=0,mid,ans;
+           int N=arr.size();
+        end=*max_element(arr.begin(),arr.end());
+        while(start<end){
+            mid=start+(end-start)/2;
+           if(canEatAll(arr,mid,h)){
+               end=mid;
+           }
+           else start=mid+1;
+        }
+        return end;
+    }
+};
+
+// GFG solution
+ int Solve(int N, vector<int>& piles, int H) {
+        int start=1,end=0,mid,ans;
+        end=*max_element(piles.begin(),piles.end());
+        while(start<=end){
+            mid=start+(end-start)/2;
+            int ActualAns=0;
+            for(int &x:piles){
+                ActualAns+=x/mid;
+                if(x%mid!=0)ActualAns++;
+            }
+            if(ActualAns<=H){
+                ans=mid;
+                end=mid-1;
+            }
+            else start=mid+1;
+        }
+        return ans;
+    }
