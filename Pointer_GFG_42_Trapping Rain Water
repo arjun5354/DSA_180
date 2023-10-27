@@ -1,0 +1,45 @@
+// Two pointer approach->O(n),O(1)
+class Solution {
+public:
+    int trap(vector<int>& height) {
+     // Using two pointer Approach
+     int l=0,r=height.size()-1;
+     int leftmax=INT_MIN,rightmax=INT_MIN,water=0;
+     while(l<r){
+         leftmax=max(leftmax,height[l]);
+         rightmax=max(rightmax,height[r]);
+         if(leftmax<rightmax){
+             water+=leftmax-height[l++];
+         }
+         else water+=rightmax-height[r--];
+     }   
+     return water;
+    }
+};
+// Looping approach->O(n),o(1)
+// GFG
+long long trappingWater(int arr[], int n){
+        long long leftmax=0,rightmax=0,maxheight=arr[0],indx=0,water=0;
+        // first find the max element of the array
+        for(int i=0;i<n;i++){
+            if(maxheight<arr[i]){
+                maxheight=arr[i];
+                indx=i;
+            }
+        }
+        // solve left part of max element indx water
+        for(int i=0;i<indx;i++){
+            if(leftmax>arr[i]){
+                water +=leftmax-arr[i];
+            }
+            else leftmax=arr[i];
+        }
+        // solve right part of max element indx water
+        for(int i=n-1;i>indx;i--){
+            if(rightmax>arr[i]){
+                water +=rightmax-arr[i];
+            }
+            else rightmax=arr[i];
+        }
+        return water;
+    }
