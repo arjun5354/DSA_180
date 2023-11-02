@@ -1,0 +1,18 @@
+void rotateby90(vector<vector<int> >& matrix, int n) 
+    { 
+        // Transpose
+     for(int i=0;i<n-1;i++){
+         for(int j=i+1;j<n;j++){
+             swap(matrix[i][j],matrix[j][i]);
+         }
+     }
+     // Reverse
+     for(int i=0;i<n;i++){
+         int s=0;
+         int e=matrix[i].size()-1;
+         while(s<=e){
+             swap(matrix[s][i],matrix[e][i]);
+             s++;
+             e--;
+         }
+     }
