@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+     int s=0;
+     int e=nums.size()-1;
+      int x=1;
+      // First sort the array in O(n) time complexity then do this .
+    //  while(s<=e){
+    //      if(nums[s]>nums[e])
+    //         swap(nums[s++],nums[e--]);
+    //  else {
+    //      s++;            // If we use this it will through TLE
+    //      e--;
+    //  }
+    sort(nums.begin(),nums.end());
+   for(int i=0;i<nums.size();i++){
+       if(nums[i]==x) x++;
+   }
+   return x;
+    }
+};
