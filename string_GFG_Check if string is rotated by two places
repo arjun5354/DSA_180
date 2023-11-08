@@ -1,0 +1,32 @@
+ void clockwiserotation(string &s){
+        char c=s[s.size()-1];
+        for(int i=s.size()-2;i>=0;i--){
+            s[i+1]=s[i];
+        }
+        s[0]=c;
+    }
+    void anticlockwiserotation(string &s){
+        char c=s[0];
+        for(int i=1;i<s.size();i++){
+            s[i-1]=s[i];
+        }
+        s[s.size()-1]=c;
+    }
+    bool isRotated(string str1, string str2)
+    {
+        string rotation=str1;
+        clockwiserotation(rotation);
+        clockwiserotation(rotation);
+        if(rotation==str2){
+            return true;
+        }
+        
+        rotation=str1;
+        anticlockwiserotation(rotation);
+        anticlockwiserotation(rotation);
+        if(rotation==str2) return true;
+        
+        
+        
+        return 0;
+    }
