@@ -1,0 +1,47 @@
+class Solution {
+public:
+    string sortVowels(string s) {
+        vector<int>lower(26,0),upper(26,0);
+        int n=s.size();
+        // Find out the Vowels
+        for(int i=0;i<n;i++){
+            // First for lower case
+            if(s[i]=='a'||s[i]=='e'||s[i]=='i'||s[i]=='o'||s[i]=='u'){
+                lower[s[i]-'a']++;
+                s[i]='#';
+            }
+            // second for upper case
+            if(s[i]=='A'||s[i]=='E'||s[i]=='I'||s[i]=='O'||s[i]=='U'){
+                upper[s[i]-'A']++;
+                s[i]='#';
+            }
+        }
+        // sort the vowels
+        string vowel="";
+        for(int i=0;i<26;i++){
+            char c=i+'A';
+            while(upper[i]){
+                vowel+=c;
+                upper[i]--;
+            }
+        }
+
+        for(int i=0;i<26;i++){
+            char c='a'+i;
+            while(lower[i]){
+                vowel+=c;
+                lower[i]--;
+            }
+        }
+       
+       // Place at the right position
+       int first=0,second=0;
+       while(second<vowel.size()){
+           if(s[first]=='#'){
+               s[first++]=vowel[second++];
+           }
+           else first++;
+       }
+       return s;
+    }
+};
