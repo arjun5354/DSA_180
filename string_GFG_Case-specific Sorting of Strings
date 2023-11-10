@@ -1,0 +1,15 @@
+string caseSort(string str, int n)
+    {
+        string small,large;
+        vector <int> v(str.size(),0);
+        for(int i=0;i<str.size();i++)
+            if(str[i]>='a' and str[i]<='z') small+=str[i];
+            else large+=str[i],v[i]=1;
+        sort(small.begin(),small.end());
+        sort(large.begin(),large.end());
+        int x=0,y=0;
+        for(int i=0;i<str.size();i++){
+            if(v[i]) str[i]=large[x++];
+            else str[i]=small[y++];
+        }
+        return str;
