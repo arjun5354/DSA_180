@@ -1,0 +1,22 @@
+int lps(string s) {
+	    vector<int>lps(s.size(),0);
+	    int pref=0,suf=1;
+	    while(suf<s.size()){
+	        // Matched character
+	        if(s[suf]==s[pref]){
+	            lps[suf]=pref+1;
+	            suf++;
+	            pref++;
+	        }
+	        // Not matched character
+	        else{
+	            if(pref==0){
+	                lps[suf++]=0;
+	            }
+	            else{
+	                pref=lps[pref-1];
+	            }
+	        }
+	    }
+	    return lps[s.size()-1];
+	}
