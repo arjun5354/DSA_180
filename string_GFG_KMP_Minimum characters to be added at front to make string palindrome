@@ -1,0 +1,25 @@
+int minChar(string str){
+        // string rev
+        string rev=str;
+        reverse(rev.begin(),rev.end());
+        int size=str.size();
+        str+='$';
+        str+=rev;
+        // longest prefix nikalna hai
+        int n=str.size();
+        vector<int>lps(n,0);
+        int prf=0,suf=1;
+        while(suf<str.size()){
+            // matched
+            if(str[prf]==str[suf]){
+                lps[suf]=prf+1;
+                prf++,suf++;
+            }
+            // didnot matched
+            else{
+                if(prf==0) suf++;
+                else prf=lps[prf-1];
+            }
+        }
+        return size-lps[n-1];
+    }
