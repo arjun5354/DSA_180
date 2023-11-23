@@ -1,0 +1,54 @@
+class Solution {
+public:
+   void findlps(vector<int>&lps,string s) {
+	   int pref=0,suf=1;
+	   while(suf<s.size()){
+	       // character matched
+	       if(s[pref]==s[suf]){
+	           lps[suf]=pref+1;
+	           suf++;
+	           pref++;
+	       }
+	       // Did't matched
+	       else{
+	           if(pref==0){
+	               lps[suf++]=0;
+	           }
+	           else{
+	               pref=lps[pref-1];
+	           }
+	       }
+	   }
+	}
+    int KMP_MATCH(string haystack, string needle) { // Tc.O(n),Sc.O(n)
+        vector<int>lps(needle.size(),0);
+        findlps(lps,needle);
+        int first=0,second=0;
+        while(first<haystack.size()&&second<needle.size()){
+            if(haystack[first]==needle[second]){
+                first++,second++;
+            }
+            else{
+                if(second==0) first++;
+                else second=lps[second-1];
+            }
+        }
+        if(second==needle.size()) return 1;
+        else return 0;
+    }
+    int repeatedStringMatch(string a, string b) {
+        if(a==b) return 1;
+        int repeat=1;
+        string temp=a;
+        while(temp.size()<b.size()){
+            temp+=a;
+            repeat++;
+        }
+        // KMP search pattern
+        if(KMP_MATCH(temp,b)==1) return repeat;
+        // temp+a,KMP search pattern
+        if(KMP_MATCH(temp+a,b)==1) return repeat+1;
+
+        return -1;
+    }
+};
